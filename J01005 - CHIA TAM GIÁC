@@ -1,0 +1,20 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitespace characters in your c
+import java.util.Scanner;
+
+public class J01004 {
+    public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int t = sc.nextInt();
+    while (t-- > 0) {
+        double n = sc.nextDouble();
+        int h = sc.nextInt();
+        for (int i = 1; i < n; i++) {
+            double kq = Math.sqrt(i / n) * h;
+            System.out.printf("%.6f ", kq);
+        }
+        System.out.println();
+    }
+
+    }
+}
