@@ -1,0 +1,47 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitesp
+
+import java.util.Scanner;
+
+public class J01004 {
+//    static int a[] = new int[2000001];
+//    public static void Era() {
+//        for (int i = 2; i * i <= 2000000; i++) {
+//            if (a[i] == 0) {
+//                for (int j = i * i; j <= 2000000; j += i) {
+//                    a[j] = i;
+//                }
+//            }
+//        }
+//        for (int i = 2; i <= 2000000; i++) {
+//            if (a[i] == 0) {
+//                a[i] = i;
+//            }
+//        }
+//    }
+
+    public static void main(String[] strArgs){
+        Scanner sc = new Scanner(System.in);
+
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            int count = 0;
+            int n = sc.nextInt();
+            for (int i = 1; i * i <= n; i++) {
+                if (n % i == 0) {
+                    if (i % 2 == 0) {
+                        count++;
+                    }
+                    if ((n / i) % 2 == 0) {
+                        count++;
+                    }
+                    if (i * i == n && i % 2 == 0) {
+                        count--;
+                    }
+                }
+            }
+            System.out.println(count);
+        }
+    }
+}
+
