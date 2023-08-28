@@ -1,0 +1,39 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitesp
+
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+
+public class J01004 {
+
+    public static String check (String s) {
+        s = s.replace('9', '0');
+        s = s.replace('8', '0');
+        return s;
+    }
+
+    public static void main(String[] strArgs){
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            String s = sc.next();
+            int flag = 0;
+            String kq = check(s);
+            int length = kq.length();
+            for (int i = 0; i < length; i++) {
+                if (kq.charAt(i) != '0' && kq.charAt(i) != '1' && kq.charAt(i) != '8' && kq.charAt(i) != '9') {
+                    flag = 1;
+                    break;
+                }
+            }
+            long m = Long.parseLong(kq);
+            if (flag == 1 || m == 0) {
+                System.out.println("INVALID");
+            } else {
+                System.out.println(m);
+            }
+        }
+    }
+}
+
