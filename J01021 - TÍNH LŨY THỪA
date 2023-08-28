@@ -1,0 +1,35 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitesp
+
+import java.util.Scanner;
+import java.lang.Math;
+public class J01004 {
+   static Long mod = 1000000007L;
+
+    public static long pow(long a, long b) {
+        if (b == 0) {
+            return 1;
+        }
+        long x = pow(a, b / 2);
+        x = (x * x ) % mod;
+        if (b % 2 == 0) {
+            return x;
+        } else {
+            return (a * x) % mod;
+        }
+    }
+
+    public static void main(String[] strArgs){
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            long a = sc.nextInt();
+            long b = sc.nextLong();
+            if (a == 0 && b == 0) {
+                return;
+            }
+            System.out.println(pow(a,b));
+        }
+
+    }
+}
+
