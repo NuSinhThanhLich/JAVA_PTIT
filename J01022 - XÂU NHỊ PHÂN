@@ -1,0 +1,40 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitesp
+
+import java.util.HashSet;
+import java.util.Scanner;
+import java.lang.Math;
+import java.util.Set;
+
+public class J01004 {
+
+    public static int Tinh(int n, long k) {
+        if (n == 1) {
+            return 0;
+        }
+        if (n == 2) {
+            return 1;
+        }
+        if (k > a[n - 2]) {
+            return Tinh(n - 1, k - a[n - 2]);
+        } else {
+            return Tinh(n - 2, k);
+        }
+    }
+    static long a[] = new long[93];
+    public static void main(String[] strArgs){
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        a[1] = 1;
+        a[2] = 1;
+        for (int i = 3; i <= 92; i++) {
+            a[i] = a[i - 2] + a[i - 1];
+        }
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            long k = sc.nextLong();
+            System.out.println(Tinh(n,k));
+        }
+    }
+}
+
