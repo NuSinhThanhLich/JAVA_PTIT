@@ -1,0 +1,35 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitesp
+
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+
+public class J01004 {
+
+
+    public static void main(String[] args){
+
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        sc.nextLine();
+        while (t-- > 0) {
+            String s1 = sc.nextLine();
+            String s2 = sc.nextLine();
+            Set<String> loc = new HashSet<String>();
+            String []a = s1.split("\\s+");
+            String []b = s2.split("\\s+");
+            for (String k : a) {
+                loc.add(k);
+            }
+            for (String m : b) {
+                loc.remove(m);
+            }
+            for (String l : loc) {
+                System.out.print(l + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
