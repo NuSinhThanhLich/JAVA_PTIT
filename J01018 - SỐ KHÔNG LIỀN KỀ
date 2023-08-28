@@ -1,0 +1,38 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitesp
+
+import java.util.Scanner;
+import java.lang.Math;
+public class J01004 {
+
+    public static Boolean check(String s) {
+        int length = s.length();
+        int count = 0;
+        for (int i = 1; i < length; i++) {
+            count += s.charAt(i) - '0';
+            if (Math.abs(s.charAt(i) - s.charAt(i - 1)) != 2) {
+                return false;
+            }
+        }
+        count += s.charAt(0) - '0';
+        if (count % 10 != 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] strArgs){
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            long n = sc.nextLong();
+            String input = Long.toString(n);
+            if (check(input)) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+        }
+    }
+}
+
