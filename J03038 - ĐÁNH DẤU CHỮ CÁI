@@ -1,0 +1,22 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitesp
+
+import java.math.BigInteger;
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+
+public class J01004 {
+
+    public static void main(String[] args){
+
+        Scanner sc = new Scanner(System.in);
+        String a = sc.next();
+        Set<Character> chek = new HashSet<Character>();
+        for (int i = 0; i < a.length(); i++) {
+            chek.add(a.charAt(i));
+        }
+        System.out.print(chek.size());
+    }
+}
+
