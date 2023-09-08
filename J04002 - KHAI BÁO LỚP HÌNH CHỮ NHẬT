@@ -1,0 +1,55 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitesp
+
+import java.math.BigInteger;
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+
+class Rectangle {
+    double width;
+    double height;
+    String color;
+
+    void input (Scanner sc) {
+        this.width = sc.nextDouble();
+        this.height = sc.nextDouble();
+        this.color = sc.next();
+        this.color = color.substring(0,1).toUpperCase() + color.substring(1).toLowerCase();
+    }
+
+    double findArea () {
+        return this.width * this.height;
+    }
+
+    double findPerimeter() {
+        return (this.width + this.height) * 2;
+    }
+
+    int checkInput () {
+        if (this.height <= 0 || this.width <= 0 ) {
+            return 0;
+        }
+        return 1;
+    }
+
+    void output() {
+        if (checkInput() == 1) {
+            System.out.printf("%d %d %s", (int)this.findPerimeter(), (int)this.findArea(), this.color);
+        } else {
+            System.out.print("INVALID");
+        }
+    }
+}
+
+public class J01004 {
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        Rectangle A = new Rectangle();
+        A.input(sc);
+        A.output();
+
+    }
+}
+
