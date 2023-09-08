@@ -1,0 +1,56 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitesp
+
+import java.math.BigInteger;
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+
+class Student {
+    String name;
+    String gender;
+    String date;
+    String address;
+    String code;
+    String tax;
+
+
+    void input(Scanner sc) {
+        this.name = sc.nextLine();
+        this.gender = sc.next();
+        this.date = sc.next();
+        sc.nextLine();
+        this.address = sc.nextLine();
+        this.code = sc.next();
+        this.tax = sc.next();
+        if (date.charAt(1) == '/') {
+            date = "0" + date;
+        }
+        if (date.charAt(4) == '/') {
+            String s = date.substring(0, 3) + "0" + date.substring(3);
+            date = s;
+        }
+        if (tax.charAt(1) == '/') {
+            tax = '0' + tax;
+        }
+        if (tax.charAt(4) == '/') {
+            String b = tax.substring(0, 3) + "0" + tax.substring(3);
+            tax = b;
+        }
+    }
+
+    void output() {
+        System.out.printf("00001 %s %s %s %s %s %s", this.name, this.gender, this.date, this.address, this.code, this.tax);
+    }
+}
+
+public class J01004 {
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        Student A = new Student();
+        A.input(sc);
+        A.output();
+    }
+}
+
