@@ -1,0 +1,55 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitesp
+
+import java.math.BigInteger;
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+
+class Fraction {
+    long top;
+    long bottom;
+
+    void input (Scanner sc) {
+        this.top = sc.nextLong();
+        this.bottom = sc.nextLong();
+    }
+
+    Fraction calculate (Fraction B) {
+        Fraction c = new Fraction();
+        c.top = this.top * B.bottom + B.top * this.bottom;
+        c.bottom = this.bottom * B.bottom;
+        c.cal();
+        return c;
+    }
+
+    void output() {
+        System.out.printf("%d/%d", this.top, this.bottom);
+    }
+
+    void cal () {
+        long a = this.top;
+        long b = this.bottom;
+        while (a != 0) {
+            long x = a;
+            a = b % a;
+            b = x;
+        }
+        this.top = this.top / b;
+        this.bottom = this.bottom / b;
+    }
+}
+
+public class J01004 {
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        Fraction A = new Fraction();
+        Fraction B = new Fraction();
+        A.input(sc);
+        B.input(sc);
+        Fraction C = A.calculate(B);
+        C.output();
+    }
+}
+
