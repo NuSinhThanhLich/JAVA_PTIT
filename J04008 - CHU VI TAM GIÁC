@@ -1,0 +1,52 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitesp
+
+import java.math.BigInteger;
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+class Point {
+    double x;
+    double y;
+
+    void input(Scanner sc) {
+        this.x = sc.nextDouble();
+        this.y = sc.nextDouble();
+    }
+
+    double distance(Point p) {
+        double x0 = this.x - p.x;
+        double y0 = this.y - p.y;
+        return Math.sqrt(x0 * x0 + y0 * y0);
+    }
+}
+
+public class J01004 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            Point p1 = new Point();
+            Point p2 = new Point();
+            Point p3 = new Point();
+            p1.input(sc);
+            p2.input(sc);
+            p3.input(sc);
+            double a = p1.distance(p2);
+            double b = p2.distance(p3);
+            double c = p3.distance(p1);
+            if (a + b <= c || a + c <= b || b + c <= a) {
+                System.out.println("INVALID");
+            } else {
+                double s = a + b + c;
+                System.out.println(String.format("%.3f",s));
+            }
+        }
+    }
+}
+
+
