@@ -1,0 +1,71 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitesp
+
+import java.util.*;
+
+class Product {
+    static int id = 1;
+    String code;
+   String name;
+   String unit;
+   int buy;
+   int sell;
+   int profit;
+
+   void input(Scanner sc) {
+       if (id < 10) {
+           this.code = "MH00";
+       } else if (id < 100) {
+           this.code = "MH0";
+       } else {
+           this.code = "MH";
+       }
+       this.code += Integer.toString(id++);
+       sc.nextLine();
+       this.name = sc.nextLine();
+       this.unit = sc.nextLine();
+       this.buy = sc.nextInt();
+       this.sell = sc.nextInt();
+       this.profit = this.sell - this.buy;
+   }
+    void output() {
+       System.out.printf("%s %s %s %d %d %d", this.code, this.name, this.unit, this.buy, this.sell, this.profit);
+       System.out.println();
+    }
+}
+
+public class B1 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        Vector<Product> v = new Vector<Product>();
+        for (int i = 0; i < t; i++) {
+            Product a = new Product();
+            a.input(sc);
+            v.add(a);
+        }
+        Collections.sort(v, new Comparator<Product>() {
+            @Override
+            public int compare(Product a, Product b) {
+                if (a.profit == b.profit) {
+                    if (a.code.compareTo(b.code) > 0) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                    //Array tang dan tu tren xuong
+                } else if (a.profit < b.profit) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
+        for (int i = 0; i < t; i++) {
+            v.get(i).output();
+        }
+    }
+}
+
+
