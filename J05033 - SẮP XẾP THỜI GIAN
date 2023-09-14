@@ -39,6 +39,7 @@ public class B1 {
                     if (a.minute == b.minute) {
                         if (a.second > b.second) {
                             return 1;
+                            //a is greater than b
                         } else {
                             return -1;
                         }
