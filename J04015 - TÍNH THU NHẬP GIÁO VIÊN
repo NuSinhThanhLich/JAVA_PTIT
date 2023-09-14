@@ -1,0 +1,49 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitesp
+
+import java.util.*;
+
+class Teacher {
+    String job;
+    String name;
+    int base;
+    int addition;
+    int hs;
+
+    void input(Scanner sc) {
+        this.job = sc.nextLine();
+        this.name = sc.nextLine();
+        this.base = sc.nextInt();
+    }
+
+    void edit () {
+        String b = this.job.substring(2);
+        if (this.job.substring(0,2).compareTo("HT") == 0) {
+            this.addition = 2000000;
+        } else if (this.job.substring(0,2).compareTo("HP") == 0) {
+            this.addition = 900000;
+        } else if (this.job.substring(0,2).compareTo("GV") == 0) {
+            this.addition = 500000;
+        }
+        this.hs = Integer.parseInt(b);
+    }
+
+
+    void output() {
+        System.out.printf("%s %s %d %d %d", this.job, this.name, this.hs, this.addition, (this.hs * this.base) + this.addition);
+    }
+
+}
+
+public class B1 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Teacher A = new Teacher();
+        A.input(sc);
+        A.edit();
+        A.output();
+    }
+}
+
+
