@@ -1,0 +1,25 @@
+import java.util.Locale;
+import java.util.Scanner;
+import java.util.Stack;
+import java.io.IOException;
+import java.io.File;
+public class B3 {
+
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(new File("DATA.in"));
+       while (true) {
+           String s = sc.nextLine();
+           if (s.compareTo("END") == 0) {
+               return;
+           }
+           s = s.toLowerCase();
+           s = s.trim();
+           String a[] = s.split("\\s+");
+            for (String ans : a) {
+                String k = ans.substring(0, 1).toUpperCase() +  ans.substring(1) + " ";
+                System.out.print(k);
+            }
+            System.out.println();
+       }
+    }
+}
