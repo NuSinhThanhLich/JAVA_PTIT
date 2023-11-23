@@ -1,0 +1,70 @@
+import java.io.File;
+import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+
+
+class SV {
+   
+    String name;
+    String code;
+    String lop;
+    String email;
+    
+
+
+    void input(Scanner sc) {
+        String s = "";
+        this.code = sc.nextLine();
+        this.name = sc.nextLine();
+        name = name.trim();
+        name = name.toLowerCase();
+        String []a = name.split("\\s+");
+        for (String k : a) {
+            s += k.substring(0, 1).toUpperCase() + k.substring(1) + " ";
+        }
+        name = s;
+        this.lop = sc.nextLine();
+        this.email = sc.nextLine();
+    }
+
+    void output () {
+        System.out.printf("%s %s %s %s", this.code, this.name, this.lop, this.email);
+        System.out.println();
+    }
+
+}
+
+
+public class B2 {
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File("SINHVIEN.in"));
+        int n = sc.nextInt();
+         sc.nextLine();
+        Vector<SV> v = new Vector<SV>();
+        for (int i = 0; i < n; i++) {
+            SV a = new SV();
+            a.input(sc);
+            v.add(a);
+        }
+        
+        Collections.sort(v, new Comparator<SV>() {
+            @Override
+            public int compare (SV a, SV b) {
+                if (a.code.compareTo(b.code) > 0) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
+        for (int i = 0; i < n; i++) {
+            v.get(i).output();
+        }
+    }
+}
