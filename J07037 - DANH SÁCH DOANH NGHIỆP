@@ -1,0 +1,60 @@
+import java.io.File;
+import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+
+
+class SV {
+   
+    String name;
+    String code;
+    int quantity;
+    
+
+
+    void input(Scanner sc) {
+         sc.nextLine();
+        this.code = sc.nextLine();
+        this.name = sc.nextLine();
+        this.quantity = sc.nextInt();
+    }
+
+    void output () {
+        System.out.printf("%s %s %d", this.code, this.name, this.quantity);
+        System.out.println();
+    }
+
+}
+
+
+public class B2 {
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File("DN.in"));
+        int n = sc.nextInt();
+        Vector<SV> v = new Vector<SV>();
+        for (int i = 0; i < n; i++) {
+            SV a = new SV();
+            a.input(sc);
+            v.add(a);
+        }
+        
+        Collections.sort(v, new Comparator<SV>() {
+            @Override
+            public int compare (SV a, SV b) {
+                if (a.code.compareTo(b.code) > 0) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
+        for (int i = 0; i < n; i++) {
+            v.get(i).output();
+        }
+    }
+}
