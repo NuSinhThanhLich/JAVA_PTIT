@@ -1,0 +1,111 @@
+
+import java.io.File;
+import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+class KH {
+
+    static int id = 1;
+    String code;
+    String name;
+    String room;
+    int price;
+    String checkIn;
+    String checkOut;
+    int fee;
+    long day;
+    int total;
+
+    void input(Scanner sc, SimpleDateFormat sdf) throws ParseException {
+        if (id < 10) {
+            this.code = "KH0";
+        } else {
+            this.code = "KH";
+        }
+        // no limit for id
+        this.code += Integer.toString(id++);
+        sc.nextLine();
+        this.name = sc.nextLine();
+        this.room = sc.nextLine();
+        this.checkIn = sc.nextLine();
+        this.checkOut = sc.nextLine();
+        this.fee = sc.nextInt();
+        Date nhan = sdf.parse(checkIn);
+        Date tra = sdf.parse(checkOut);
+        this.day = tinhNgay(nhan, tra);
+        this.name = configName(this.name);
+
+        if (this.room.charAt(0) == '1') {
+            this.price = 25;
+        }
+        if (this.room.charAt(0) == '2') {
+            this.price = 34;
+        }
+        if (this.room.charAt(0) == '3') {
+            this.price = 50;
+        }
+        if (this.room.charAt(0) == '4') {
+            this.price = 80;
+        }
+
+
+        this.total = Math.toIntExact(this.day * this.price + this.fee);
+    }
+
+    long tinhNgay(Date d1, Date d2) {
+        long cnt = d2.getTime() - d1.getTime();
+        cnt = cnt / (24 * 60 * 60 * 1000) + 1;
+        return cnt;
+    }
+
+    String configName(String a) {
+        String s = "";
+        String[] m = a.trim().toLowerCase().split("\\s+");
+        for (String k : m) {
+            s += k.substring(0, 1).toUpperCase() + k.substring(1) + " ";
+        }
+        return s.trim();
+    }
+
+    void output() {
+        System.out.printf("%s %s %s %d %d", this.code, this.name, this.room, this.day, this.total);
+        System.out.println();
+    }
+}
+
+public class Practice {
+
+    public static void main(String[] args) throws FileNotFoundException, ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Scanner sc = new Scanner(new File("KHACHHANG.in"));
+        int n = sc.nextInt();
+        Vector<KH> v = new Vector<>();
+        for (int i = 0; i < n; i++) {
+            KH a = new KH();
+            a.input(sc, sdf);
+            v.add(a);
+        }
+
+        Collections.sort(v, new Comparator<KH>() {
+            @Override
+            public int compare(KH a, KH b) {
+                if (a.total > b.total) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        });
+        for (int i = 0; i < n; i++) {
+            v.get(i).output();
+        }
+    }
+}
