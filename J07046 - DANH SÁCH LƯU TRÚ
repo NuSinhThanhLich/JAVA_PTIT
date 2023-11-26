@@ -1,0 +1,96 @@
+
+import java.io.File;
+import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.text.DecimalFormat;
+import static java.lang.Math.round;
+
+class TS {
+   static int id = 1;
+   String code;
+   String name;
+   String room;
+   String checkIn;
+   String checkOut;
+   long day;
+ 
+
+   void input(Scanner sc,  SimpleDateFormat sdf) throws ParseException {
+
+       if (id < 10) {
+           this.code = "KH0";
+       } else {
+           this.code = "KH";
+       }
+       // no limit for id
+       this.code += Integer.toString(id++);
+
+        sc.nextLine();
+        this.name = sc.nextLine();
+       this.room = sc.next();
+       this.checkIn = sc.next();
+       this.checkOut = sc.next();
+       Date nhan = sdf.parse(checkIn);
+       Date tra = sdf.parse(checkOut);
+       this.day = demNgay(nhan, tra);
+   }
+
+    long demNgay (Date a, Date b) {
+        long cnt = b.getTime() - a.getTime();
+        cnt = cnt / (24 * 60 * 60 * 1000);
+        return cnt;
+    }
+   
+    String configName (String a) {
+       String s = "";
+       String[] k = a.trim().toLowerCase().split("\\s+");
+       for (String m : k) {
+           s += m.substring(0,1).toUpperCase() + m.substring(1) + " ";
+       }
+       return s;
+    }
+    void output() {
+        // neu tron thi ko co .0
+        System.out.printf("%s %s %s %d\n", this.code, this.name, this.room, this.day);
+    }
+}
+
+public class Practice {
+
+    public static void main(String[] args) throws FileNotFoundException, ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Scanner sc = new Scanner(new File("KHACH.in"));
+        int n = sc.nextInt();
+        Vector<TS> v = new Vector<>();
+        for (int i = 0; i < n; i++) {
+            TS a = new TS();
+            a.input(sc, sdf);
+            v.add(a);
+        }
+        
+        Collections.sort(v, new Comparator<TS>() {
+            @Override
+            public int compare (TS a, TS b) {
+                if (a.day > b.day) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        });
+        
+        for (int i = 0; i < n; i++) {
+            v.get(i).output();
+        }
+
+        }
+    }
+
