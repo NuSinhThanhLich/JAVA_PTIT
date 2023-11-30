@@ -1,0 +1,56 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+/**
+ *
+ *
+ */
+public class Main {
+
+    private static class Teacher implements Comparable<Teacher> {
+        private String code, name, theory, practice;
+        private int tinchi;
+
+        public Teacher(Scanner sc) {
+            this.code = sc.next();
+            sc.nextLine();
+            this.name = sc.nextLine();
+            this.tinchi = sc.nextInt();
+            sc.nextLine();
+            this.theory = sc.nextLine();
+            this.practice = sc.nextLine();
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%s %s %d %s %s", this.code, this.name, this.tinchi, this.theory, this.practice);
+        }
+
+        @Override
+        public int compareTo(Teacher c) {
+            if (this.code.compareTo(c.code) > 0) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    }
+
+
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File("MONHOC.in"));
+        int t = sc.nextInt();
+        ArrayList<Teacher> al = new ArrayList<>();
+        while (t-- > 0) {
+            al.add(new Teacher(sc));
+        }
+        Collections.sort(al);
+        for (Teacher m : al) {
+            if (m.practice.compareTo("Truc tiep") != 0) {
+                System.out.println(m);
+            }
+        }
+    }
+}
