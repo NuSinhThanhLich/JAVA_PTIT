@@ -1,0 +1,66 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+/**
+ *
+ *
+ */
+public class Main {
+
+
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+           String s = sc.next();
+           int check = 0;
+           Stack<Character> st = new Stack<>();
+           for (int i = 0; i < s.length(); i++) {
+               if (st.empty()) {
+                   st.push(s.charAt(i));
+               }
+
+               else if (s.charAt(i) == ')') {
+                   if (st.peek() != '(') {
+                       check = 1;
+                       break;
+                   } else {
+                       st.pop();
+                   }
+               }
+
+               else if (s.charAt(i) == ']') {
+                   if (st.peek() != '[') {
+                       check = 1;
+                       break;
+                   } else {
+                       st.pop();
+                   }
+               }
+
+               else if (s.charAt(i) == '}') {
+                   if (st.peek() != '{') {
+                       check = 1;
+                       break;
+                   } else {
+                       st.pop();
+                   }
+               } else {
+                   st.push(s.charAt(i));
+               }
+           }
+           if (check == 1) {
+               System.out.println("NO");
+           } else {
+               System.out.println("YES");
+           }
+        }
+    }
+}
