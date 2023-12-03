@@ -1,0 +1,48 @@
+package com.mycompany.mavenproject1;
+
+import java.io.*;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
+import java.util.Vector;
+
+/**
+ *
+ *
+ */
+public class Mavenproject1 {
+
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            int[] a = new int[n];
+            int[] b = new int[n];
+            for (int i = 0; i < n; i++) {
+                a[i] = sc.nextInt();
+            }
+            Stack<Integer> st = new Stack<Integer>();
+            for (int i = 0; i < n; i++) {
+                while (!st.empty() && a[i] >= a[st.peek()]) {
+                    st.pop();
+                }
+                if (st.empty()) {
+                   b[i] = i + 1;
+                } else {
+                    b[i] = i - st.peek();
+                }
+                st.add(i);
+            }
+            for (int g : b) {
+                System.out.printf("%d ", g);
+            }
+            System.out.println();
+        }
+    }
+}
