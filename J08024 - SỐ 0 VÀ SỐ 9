@@ -1,0 +1,38 @@
+package com.mycompany.mavenproject1;
+
+import java.io.*;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
+
+/**
+ *
+ *
+ */
+public class Mavenproject1 {
+
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            Queue<Integer> qt = new LinkedList<>();
+            qt.add(9);
+            while (true) {
+                int x = qt.poll();
+                if (x % n == 0) {
+                    System.out.printf("%d\n", x);
+                    break;
+                }
+                qt.add(x * 10);
+                qt.add(x * 10 + 9);
+
+            }
+        }
+    }
+}
