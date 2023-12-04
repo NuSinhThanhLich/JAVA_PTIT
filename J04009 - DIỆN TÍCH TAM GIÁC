@@ -1,0 +1,63 @@
+package com.mycompany.mavenproject1;
+
+import java.io.*;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Stack;
+import java.util.Vector;
+
+/**
+ *
+ *
+ */
+
+class Point {
+    double x;
+    double y;
+    
+    void input(Scanner sc) {
+        this.x = sc.nextDouble();
+        this.y = sc.nextDouble();
+    }
+    
+    double distance (Point a) {
+        double ver = this.x - a.x;
+        double hori = this.y - a.y;
+        double dis = Math.sqrt(ver * ver + hori * hori);
+        return dis;
+    }
+}
+
+public class Mavenproject1 {
+
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            Point a = new Point();
+            Point b = new Point();
+            Point c = new Point();
+            a.input(sc);
+            b.input(sc);
+            c.input(sc);
+            int check = 0;
+            double A = a.distance(b);
+            double B = a.distance(c);
+            double C = b.distance(c);
+              double s = (A + B + C)/2;
+             if (A == 0 || B == 0 || C == 0 || A + B <= C || B + C <= A || A + C <= B) {
+                System.out.println("INVALID");
+            } else {
+                double area = Math.sqrt(s*(s-A)*(s-B)*(s-C));;
+                System.out.printf("%.2f \n", area);
+            }
+        }
+    }
+}
