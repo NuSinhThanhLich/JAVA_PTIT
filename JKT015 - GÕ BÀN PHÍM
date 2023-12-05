@@ -1,0 +1,131 @@
+package com.mycompany.mavenproject1;
+
+import java.io.File;
+import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.text.DecimalFormat;
+import static java.lang.Math.round;
+
+class TS {
+
+    static int id = 1;
+    String code;
+    String name;
+
+    String typeHouse;
+    int dau;
+    int cuoi;
+    int limit;
+    int trongDM;
+    int ngoaiDM;
+    int tong;
+
+    void input(Scanner sc, SimpleDateFormat sdf) throws ParseException {
+
+        if (id < 10) {
+            this.code = "KH0";
+        } else {
+            this.code = "KH";
+        }
+        // no limit for id
+        this.code += Integer.toString(id++);
+
+        sc.nextLine();
+        this.name = sc.nextLine();
+        this.typeHouse = sc.next();
+        this.dau = sc.nextInt();
+        this.cuoi = sc.nextInt();
+
+        name = configName(name);
+
+        if (typeHouse.compareTo("A") == 0) {
+            limit = 100;
+            if (cuoi - dau <= limit) {
+                trongDM = cuoi - dau;
+            } else {
+                trongDM = limit;
+            }
+        }
+        if (typeHouse.compareTo("B") == 0) {
+            limit = 500;
+            if (cuoi - dau <= limit) {
+                trongDM = cuoi - dau;
+            } else {
+                trongDM = limit;
+            }
+        }
+        if (typeHouse.compareTo("C") == 0) {
+            limit = 200;
+            if (cuoi - dau <= limit) {
+                trongDM = cuoi - dau;
+            } else {
+                trongDM = limit;
+            }
+        }
+
+        ngoaiDM = (cuoi - dau) - trongDM;
+        tong = this.trongDM * 450 + this.ngoaiDM * 1000 + (int) this.ngoaiDM * 50;
+    }
+
+    String configName(String a) {
+        String s = "";
+        String[] k = a.trim().toLowerCase().split("\\s+");
+        for (String m : k) {
+            s += m.substring(0, 1).toUpperCase() + m.substring(1) + " ";
+        }
+        return s;
+    }
+
+    void output() {
+        // neu tron thi ko co .
+        System.out.printf("%s %s%d %d %d %d\n", this.code, this.name, this.trongDM * 450, this.ngoaiDM * 1000, (int) this.ngoaiDM * 50, this.tong);
+
+    }
+}
+
+public class Mavenproject1 {
+
+    public static void main(String[] args) throws FileNotFoundException, ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        Stack<Character> s1 = new Stack<>();
+        Stack<Character> s2 = new Stack<>();
+        
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '<') {
+                if (s1.size() > 0) {
+                    s2.push(s1.peek());
+                    s1.pop();
+                }
+            } else if (s.charAt(i) == '>') {
+                if (s2.size() > 0) {
+                    s1.push(s2.peek());
+                    s2.pop();
+                }
+            } else if (s.charAt(i) == '-') {
+                if (s1.size() > 0)
+                s1.pop();
+            } else {
+                s1.push(s.charAt(i));
+            }
+        }
+        while (s1.size() > 0) {
+            s2.push(s1.peek());
+            s1.pop();
+        }
+        while (s2.size() > 0) {
+            System.out.print(s2.peek());
+            s2.pop();
+        }
+        sc.close();
+    }
+}
