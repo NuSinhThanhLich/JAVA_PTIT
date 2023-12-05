@@ -1,0 +1,63 @@
+package com.mycompany.mavenproject1;
+
+import java.io.File;
+import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.text.DecimalFormat;
+import static java.lang.Math.round;
+
+class Point {
+
+    double x;
+    double y;
+
+    void input(Scanner sc) {
+        this.x = sc.nextDouble();
+        this.y = sc.nextDouble();
+    }
+
+    double distance(Point a) {
+        double x1 = this.x - a.x;
+        double y1 = this.y - a.y;
+        double dis = Math.sqrt(x1 * x1 + y1 * y1);
+        return dis;
+    }
+
+}
+
+public class Mavenproject1 {
+
+    public static void main(String[] args) throws FileNotFoundException, ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            Point a = new Point();
+            Point b = new Point();
+            Point c = new Point();
+            a.input(sc);
+            b.input(sc);
+            c.input(sc);
+            double A = a.distance(b);
+            double B = a.distance(c);
+            double C = b.distance(c);
+            double s = (A + B + C) / 2;
+            if (A == 0 || B == 0 || C == 0 || A + B <= C || B + C <= A || A + C <= B) {
+                System.out.println("INVALID");
+            } else {
+                double area = Math.sqrt(s * (s - A) * (s - B) * (s - C));;
+                double r = (A * B * C) / (4 * area);
+                double ans = Math.PI * r * r;
+                System.out.printf("%.3f\n", ans);
+            }
+        }
+    }
+}
