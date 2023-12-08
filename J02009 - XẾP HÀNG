@@ -1,0 +1,98 @@
+package com.mycompany.practice;
+
+import java.io.PrintStream;
+import java.text.DecimalFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+import java.util.Vector;
+
+class SV {
+
+    String code;
+    String name;
+    float math;
+    float physic;
+    float chemis;
+    String khuvuc;
+    float add;
+    float score;
+    String status;
+
+    void input(Scanner sc) {
+        this.code = sc.next();
+        sc.nextLine();
+        this.name = sc.nextLine();
+        this.math = sc.nextFloat();
+        this.physic = sc.nextFloat();
+        this.chemis = sc.nextFloat();
+
+        khuvuc = code.substring(0, 3);
+        if (khuvuc.compareTo("KV1") == 0) {
+            this.add = 0.5F;
+        }
+        if (khuvuc.compareTo("KV2") == 0) {
+            this.add = 1F;
+        }
+        if (khuvuc.compareTo("KV3") == 0) {
+            this.add = 2.5F;
+        }
+
+        score = (math * 2) + physic + chemis;
+        if (score + add >= 24) {
+            status = "TRUNG TUYEN";
+        } else {
+            status = "TRUOT";
+        }
+    }
+
+    void output() {
+        System.out.printf("%s %s %s %s %s", this.code, this.name, new DecimalFormat().format(this.add), new DecimalFormat().format(this.score), this.status);
+    }
+}
+
+class pair {
+
+    int a;
+    int b;
+
+    void input(Scanner sc) {
+        this.a = sc.nextInt();
+        this.b = sc.nextInt();
+    }
+}
+
+public class Practice {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        Vector<pair> v = new Vector<>();
+        for (int i = 0; i < t; i++) {
+            pair A = new pair();
+            A.input(sc);
+            v.add(A);
+        }
+
+        Collections.sort(v, new Comparator<pair>() {
+            @Override
+            public int compare(pair A, pair B) {
+                if (A.a > B.a) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
+        int ans = 0;
+        for (int i = 0; i < t; i++) {
+            if (ans <= v.get(i).a) {
+                ans = v.get(i).a;
+                ans += v.get(i).b;
+            } else {
+                ans += v.get(i).b;
+            }
+        }
+        System.out.print(ans);
+    }
+}
