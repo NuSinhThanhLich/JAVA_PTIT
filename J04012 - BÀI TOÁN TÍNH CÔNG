@@ -1,0 +1,73 @@
+package com.mycompany.practice;
+
+
+import java.io.PrintStream;
+import java.util.Scanner;
+
+class NV {
+
+    static int id = 1;
+    String code;
+    String name;
+    long basic;
+    long day;
+    String job;
+
+    long fee;
+    long add1;
+    long add2;
+    long total;
+
+    void input(Scanner sc) {
+        if (id < 10) {
+            this.code = "NV0";
+        } else {
+            this.code = "NV";
+        }
+        this.code += Integer.toString(id++);
+
+        this.name = sc.nextLine();
+        this.basic = sc.nextLong();
+        this.day = sc.nextLong();
+        this.job = sc.next();
+
+         fee = day * basic;
+        
+        if (day >= 25) {
+            this.add1 = fee / 5;
+        } else if (day >= 22 && day < 25) {
+            this.add1 = fee / 10;
+        } else {
+            this.add1 = 0;
+        }
+
+        if (job.compareTo("GD") == 0) {
+            this.add2 = 250000;
+        }
+        if (job.compareTo("PGD") == 0) {
+            this.add2 = 200000;
+        }
+        if (job.compareTo("TP") == 0) {
+            this.add2 = 180000;
+        }
+        if (job.compareTo("NV") == 0) {
+            this.add2 = 150000;
+        }
+        
+        total = fee + add1 + add2;
+    }
+    
+    void output() {
+       System.out.printf("%s %s %d %d %d %d", this.code, this.name, this.fee, this.add1, this.add2, this.total);
+    }
+}
+
+public class Practice {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        NV a = new NV();
+        a.input(sc);
+        a.output();
+    }
+}
