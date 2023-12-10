@@ -1,0 +1,100 @@
+package com.mycompany.practice;
+
+import java.io.PrintStream;
+import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+import java.util.Vector;
+
+class ps {
+
+    long x;
+    long y;
+
+    void input(Scanner sc) {
+        this.x = sc.nextLong();
+        this.y = sc.nextLong();
+    }
+
+    ps sum(ps a) {
+        long n = this.y;
+        this.x = this.x * a.y;
+        this.y = this.y * a.y;
+
+        a.x = a.x * n;
+        a.y = a.y * n;
+
+        ps c = new ps();
+        c.x = a.x + this.x;
+        c.y = this.y;
+
+        return c;
+    }
+
+    ps mul(ps a) {
+        ps c = new ps();
+        c.x = this.x * a.x;
+        c.y = this.y * a.y;
+        return c;
+    }
+
+    ps calc(ps a, ps b) {
+        ps c = new ps();
+        c = a.sum(b);
+
+        c.x = c.x * c.x;
+        c.y = c.y * c.y;
+        // rut gon c
+        long ctop = c.x;
+        long cbottom = c.y;
+        while (ctop != 0) {
+            long m = ctop;
+            ctop = cbottom % ctop;
+            cbottom = m;
+        }
+        c.x = c.x / cbottom;
+        c.y = c.y / cbottom;
+        return c;
+    }
+
+    ps cald(ps a, ps b, ps c) {
+        ps d = new ps();
+        d = a.mul(b);
+        d = d.mul(c);
+
+        long dtop = d.x;
+        long dbottom = d.y;
+        while (dtop != 0) {
+            long m = dtop;
+            dtop = dbottom % dtop;
+            dbottom = m;
+        }
+        d.x = d.x / dbottom;
+        d.y = d.y / dbottom;
+        return d;
+    }
+}
+
+public class Practice {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            ps a = new ps();
+            ps b = new ps();
+            a.input(sc);
+            b.input(sc);
+
+            ps c = new ps();
+            
+            ps d = new ps();
+            c = c.calc(a, b);
+            d = d.cald(a, b, c);
+            System.out.printf("%d/%d ", c.x, c.y);
+            System.out.printf("%d/%d\n", d.x, d.y);
+        }
+    }
+}
