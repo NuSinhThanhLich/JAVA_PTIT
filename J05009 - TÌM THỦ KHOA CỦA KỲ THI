@@ -1,0 +1,118 @@
+package com.mycompany.practice;
+
+import java.io.PrintStream;
+import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.Vector;
+
+class SV {
+
+    static int id = 1;
+    String code;
+    String name;
+
+    String date;
+    float d1;
+    float d2;
+    float d3;
+    float total;
+
+    void input(Scanner sc) {
+
+//        if (id < 10) {
+//            this.code = "0000";
+//        } else {
+//            this.code = "000";
+//        }
+        this.code = Integer.toString(id++);
+
+        sc.nextLine();
+        this.name = sc.nextLine();
+        this.date = sc.nextLine();
+        this.d1 = sc.nextFloat();
+        this.d2 = sc.nextFloat();
+        this.d3 = sc.nextFloat();
+
+        this.total = d1 + d2 + d3;
+
+//        if (this.date.charAt(1) == '/') {
+//            date = "0" + date;
+//        } 
+//        if (this.date.charAt(4) == '/') {
+//            String s = date.substring(0, 3) + "0" + date.substring(3);
+//            date = s;
+//        }
+        this.name = configName(name);
+
+    }
+
+    String configName(String a) {
+        String[] k = a.trim().toLowerCase().split("\\s+");
+        String s = "";
+        for (String b : k) {
+            s += b.substring(0, 1).toUpperCase() + b.substring(1) + " ";
+        }
+        return s;
+    }
+
+    void output() {
+        System.out.printf("%s %s %s %.1f\n", this.code, this.name, this.date, this.total);
+    }
+}
+
+public class Practice {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        Vector<SV> v = new Vector<>();
+        Vector<SV> ans = new Vector<>();
+        for (int i = 0; i < t; i++) {
+            SV a = new SV();
+            a.input(sc);
+            v.add(a);
+        }
+
+        Collections.sort(v, new Comparator<SV>() {
+            @Override
+            public int compare(SV a, SV b) {
+                if (a.total == b.total) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
+
+        SV max = new SV();
+        max = v.get(0);
+        ans.add(max);
+
+        for (int i = 1; i < t; i++) {
+            if (v.get(i).total == max.total) {
+                ans.add(v.get(i));
+            }
+        }
+        
+         Collections.sort(ans, new Comparator<SV>() {
+            @Override
+            public int compare(SV a, SV b) {
+                if (a.code.compareTo(b.code) > 0) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
+         
+        for (int i = 0; i < ans.size(); i++) {
+            v.get(i).output();
+        }
+    }
+}
