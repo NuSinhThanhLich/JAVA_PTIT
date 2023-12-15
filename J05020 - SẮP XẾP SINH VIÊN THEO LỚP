@@ -1,0 +1,96 @@
+package com.mycompany.practice;
+
+import java.io.PrintStream;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.Vector;
+
+class HS {
+
+//    static int id = 1;
+    String code;
+    String name;
+    String lop;
+    String email;
+
+    void input(Scanner sc) {
+
+//        if (id < 10) {
+//            this.code = "HS0";
+//        } else {
+//            this.code = "HS";
+//        }
+//        this.code += Integer.toString(id++);
+
+        this.code = sc.next();
+        sc.nextLine();
+        this.name = sc.nextLine();
+        this.lop = sc.nextLine();
+        this.email = sc.nextLine();
+
+       
+
+//        if (this.date.charAt(1) == '/') {
+//            date = "0" + date;
+//        } 
+//        if (this.date.charAt(4) == '/') {
+//            String s = date.substring(0, 3) + "0" + date.substring(3);
+//            date = s;
+//        }
+    }
+
+    String configName(String a) {
+        String[] k = a.trim().toLowerCase().split("\\s+");
+        String s = "";
+        for (String b : k) {
+            s += b.substring(0, 1).toUpperCase() + b.substring(1) + " ";
+        }
+        return s;
+    }
+
+    void output() {
+        System.out.printf("%s %s %s %s\n", this.code, this.name, this.lop, this.email);
+    }
+}
+
+public class Practice {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<HS> l = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            HS a = new HS();
+            a.input(sc);
+            l.add(a);
+        }
+        
+        Collections.sort(l, new Comparator<HS>() {
+            @Override
+            public int compare (HS a, HS b) {
+              if (a.lop.compareTo(b.lop) == 0) {
+                  if (a.code.compareTo(b.code) > 0) {
+                      return 1;
+                  } else {
+                      return -1;
+                  }
+              } else if (a.lop.compareTo(b.lop) > 0) {
+                  return 1;
+              } else {
+                  return -1;
+              }
+            }
+        });
+        for (int i = 0; i < l.size(); i++) {
+            l.get(i).output();
+        }
+    }
+}
