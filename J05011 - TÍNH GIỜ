@@ -1,0 +1,102 @@
+package com.mycompany.practice;
+
+import java.io.PrintStream;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.Vector;
+
+class MH {
+
+//    static int id = 1;
+    String code;
+    String name;
+    String in;
+    String out;
+    int hour;
+    int minute;
+    int time;
+    String timeToSort;
+
+    void input(Scanner sc) {
+
+//        if (id < 10) {
+//            this.code = "0000";
+//        } else {
+//            this.code = "000";
+//        }
+//        this.code = Integer.toString(id++);
+
+        this.code = sc.next();
+        sc.nextLine();
+        this.name = sc.nextLine();
+        this.in = sc.next();
+        this.out = sc.next();
+        
+        this.hour = Integer.parseInt(out.substring(0,2)) - Integer.parseInt(in.substring(0, 2));
+        this.minute = Integer.parseInt(out.substring(3)) - Integer.parseInt(in.substring(3));
+        this.time = hour * 60 + minute;
+        this.timeToSort = Integer.toString(time / 60) + " gio " + Integer.toString(time - (time / 60) * 60) + " phut";
+        
+        
+
+//        if (this.date.charAt(1) == '/') {
+//            date = "0" + date;
+//        } 
+//        if (this.date.charAt(4) == '/') {
+//            String s = date.substring(0, 3) + "0" + date.substring(3);
+//            date = s;
+//        }
+        
+
+    }
+
+    String configName(String a) {
+        String[] k = a.trim().toLowerCase().split("\\s+");
+        String s = "";
+        for (String b : k) {
+            s += b.substring(0, 1).toUpperCase() + b.substring(1) + " ";
+        }
+        return s;
+    }
+
+    void output() {
+        System.out.printf("%s %s %s\n", this.code, this.name, this.timeToSort);
+    }
+}
+
+public class Practice {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        List<MH> l = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            MH a = new MH();
+            a.input(sc);
+            l.add(a);
+        }
+       
+        Collections.sort(l, new Comparator<MH>() {
+            @Override
+            public int compare (MH a, MH b) {
+                if (a.time > b.time) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        });
+        for (int i = 0; i < l.size(); i++) {
+            l.get(i).output();
+        }
+    }
+}
