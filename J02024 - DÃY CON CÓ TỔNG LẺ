@@ -1,0 +1,76 @@
+package com.mycompany.practice;
+
+import java.io.PrintStream;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.Vector;
+
+
+public class Practice {
+
+    public static int n;
+    public static int a[] = new int[100];
+    public static int b[] = new int[100];
+
+    public static int kt() {
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            if (b[i] == 1) {
+                sum += a[i];
+            }
+        }
+        if (sum % 2 == 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    public static void sinh(int i) {
+        for (int j = 0; j <= 1; j++) {
+            b[i] = j;
+            if (i == n - 1) {
+                if (kt() == 1) {
+                    for (int h = 0; h < n; h++) {
+                        if (b[h] == 1) {
+                            System.out.print(a[h] + " ");
+                            //dung printf ton nhieu bo nho hon
+                        }
+                    }
+                    System.out.println();
+                }
+            } else {
+                sinh(i + 1);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            n = sc.nextInt();
+            for (int i = 0; i < n; i++) {
+                a[i] = sc.nextInt();
+            }
+            for (int i = 0; i < n - 1; i++) {
+                for (int j = i + 1; j < n; j++) {
+                    if (a[i] < a[j]) {
+                        int m = a[i];
+                        a[i] = a[j];
+                        a[j] = m;
+                    }
+                }
+            }
+            sinh(0);
+        }
+    }
+}
