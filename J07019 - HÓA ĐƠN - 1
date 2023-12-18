@@ -1,0 +1,113 @@
+package com.mycompany.practice;
+
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.PrintStream;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.Vector;
+import java.util.*;
+
+public class Practice {
+
+    static int id = 1;
+
+    public static class SanPham {
+
+        private String maSP, tenSP;
+        private int donGia1, donGia2;
+
+        public SanPham(Scanner sc) {
+            this.maSP = sc.next();
+            sc.nextLine();
+            this.tenSP = sc.nextLine();
+            this.donGia1 = sc.nextInt();
+            this.donGia2 = sc.nextInt();
+        }
+    }
+
+    public static class HoaDon {
+
+        private String maHD, tenSP;
+        private int soLuong, donGia;
+        private long giamGia, thanhTien, tienTra;
+
+        public HoaDon(Scanner sc, ArrayList<SanPham> dsSP) {
+            this.maHD = configMa(sc.next(), id++);
+            this.soLuong = sc.nextInt();
+
+            //lay thong tin tu sanpham
+            for (SanPham i : dsSP) {
+                if (this.maHD.contains(i.maSP)) {
+                    this.tenSP = i.tenSP;
+                    if (this.maHD.charAt(2) == '1') {
+                        this.donGia = i.donGia1;
+                    } else {
+                        this.donGia = i.donGia2;
+                    }
+                }
+            }
+
+            this.thanhTien = this.soLuong * this.donGia;
+            if (this.soLuong >= 150) {
+                this.giamGia = Math.round(this.thanhTien * 0.5);
+            } else if (this.soLuong >= 100) {
+                this.giamGia = Math.round(this.thanhTien * 0.3);
+            } else if (this.soLuong >= 50) {
+                this.giamGia = Math.round(this.thanhTien * 0.15);
+            } else {
+                this.giamGia = 0;
+            }
+            this.tienTra = this.thanhTien - this.giamGia;
+        }
+
+        String configMa(String s, int n) {
+            String b = String.valueOf(n);
+            while(b.length()<3) b = '0'+b;
+            return s+"-"+b;
+        }
+        
+        
+        @Override
+        public String toString() {
+            return this.maHD + ' ' + this.tenSP + ' ' + String.format("%d %d", this.giamGia, this.tienTra);
+        }
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File("DATA1.in"));
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        int t = sc.nextInt();
+        ArrayList<SanPham> dsSP = new ArrayList<>();
+        while (t-- > 0) {
+            dsSP.add(new SanPham(sc));
+        }
+
+        sc = new Scanner(new File("DATA2.in"));
+        ArrayList<HoaDon> dsHD = new ArrayList<>();
+        t = sc.nextInt();
+        while (t-- > 0) {
+            dsHD.add(new HoaDon(sc, dsSP));
+        }
+        
+        for (HoaDon tmp : dsHD) {
+              System.out.println(tmp);
+        }
+    }
+}
