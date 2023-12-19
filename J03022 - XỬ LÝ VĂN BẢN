@@ -1,0 +1,53 @@
+package com.mycompany.practice;
+
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.PrintStream;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.Vector;
+import java.util.*;
+
+public class Practice {
+    
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner sc = new Scanner(System.in);
+        String s = "";
+        while (sc.hasNext()) {
+            s += sc.next() + " ";
+        }
+        s = s.toLowerCase();
+        s = s.replace('?', '.');
+        s = s.replace('!', '.');
+        s = s.replace(". ", ".");
+        String data[] = s.split("\\.");
+        for (String i : data) {
+            if (Character.isAlphabetic(i.charAt(0))) {
+                System.out.println(Character.toUpperCase(i.charAt(0)) + i.substring(1));
+                continue;
+            }
+            for (int m = 0; m < i.length(); m++) {
+                if (Character.isAlphabetic(i.charAt(m)) || Character.isDigit(i.charAt(m))) {
+                    System.out.println(i);
+                    break;
+                }
+            }
+        }
+    }
+}
